@@ -1,9 +1,8 @@
 package csx370.structure;
 
 /************************************************************************************
- * @file BpTreeMap.java
- *
- * @author  John Miller
+ * @file   BpTreeMap.java
+ * @author John Miller
  */
 
 import java.io.*;
@@ -20,7 +19,6 @@ import java.util.*;
  */
 public class BpTreeMap<K extends Comparable<K>, V> extends AbstractMap<K, V> 
 	implements Serializable, Cloneable, SortedMap<K, V> {
-	
 	/** Debugger */
 	private static final boolean DEBUG = false;
 	
@@ -121,8 +119,8 @@ public class BpTreeMap<K extends Comparable<K>, V> extends AbstractMap<K, V>
 	
 	/********************************************************************************
 	 * Given the key, look up the value in the B+Tree map.
-	 * @param key  the key used for look up
-	 * @return  the value associated with the key
+	 * @param key the key used for look up
+	 * @return    the value associated with the key
 	 */
 	@SuppressWarnings("unchecked")
 	public V get(Object key) {
@@ -168,7 +166,7 @@ public class BpTreeMap<K extends Comparable<K>, V> extends AbstractMap<K, V>
 	 * Put the key-value pair in the B+Tree map.
 	 * @param key    the key to insert
 	 * @param value  the value to insert
-	 * @return  null (not the previous value)
+	 * @return       null (not the previous value)
 	 */
 	public V put(K key, V value) {
 		insert(key, value, root, null);
@@ -390,8 +388,8 @@ public class BpTreeMap<K extends Comparable<K>, V> extends AbstractMap<K, V>
 	/********************************************************************************
 	 * Recursive helper function for finding a key in B+trees.
 	 * @param key  the key to find
-	 * @param n  the current node
-	 * @return value
+	 * @param n    the current node
+	 * @return     value
 	 */
 	@SuppressWarnings({ "unchecked", "unused" })
 	private V find(K key, Node n) {
@@ -802,9 +800,9 @@ public class BpTreeMap<K extends Comparable<K>, V> extends AbstractMap<K, V>
 	
 	/********************************************************************************
 	 * Non-Recursive helper function for locating tuple where insertion will occur
-	 * @param key  the key to insert
-	 * @param stack    trace to root
-	 * @return located node
+	 * @param key   the key to insert
+	 * @param stack trace to root
+	 * @return      located node
 	 */
 	@SuppressWarnings("unchecked")
 	private Node locate(K key, Stack<Node> stack) {
@@ -878,11 +876,11 @@ public class BpTreeMap<K extends Comparable<K>, V> extends AbstractMap<K, V>
 	
 	/********************************************************************************
 	 * Split internal node n and return the key to be bubbled up the tree
-	 * @param key  the key to insert
-	 * @param ref  the value/node to insert
-	 * @param left    the current node
-	 * @param right    the newer node
-	 * @return key
+	 * @param key   the key to insert
+	 * @param ref   the value/node to insert
+	 * @param left  the current node
+	 * @param right the newer node
+	 * @return      key
 	 */
 	@SuppressWarnings("unchecked")
 	private K iSplit(K key, V ref, Node left, Node right) {
@@ -920,7 +918,7 @@ public class BpTreeMap<K extends Comparable<K>, V> extends AbstractMap<K, V>
 	 * @param key  the key to insert
 	 * @param ref  the value/node to insert
 	 * @param n    the current node
-	 * @return right split node
+	 * @return     right split node
 	 */
 	@SuppressWarnings("unchecked")
 	private Node split(K key, V ref, Node n) {

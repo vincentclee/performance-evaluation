@@ -1,11 +1,9 @@
 package csx370.operator;
 
 /*****************************************************************************************
- * @file  KeyType.java
- *
- * @author   John Miller
- * 
- * @see http://leepoint.net/notes-java/data/expressions/22compareobjects.html
+ * @file   KeyType.java
+ * @author John Miller
+ * @see    http://leepoint.net/notes-java/data/expressions/22compareobjects.html
  */
 
 import java.io.Serializable;
@@ -18,44 +16,43 @@ import static java.lang.System.out;
  * uniquely identify a tuple.
  */
 public class KeyType implements Comparable<KeyType>, Serializable {
-	/**
-	 * Array holding the attribute values for a particular key
-	 */
+	/** Serialization */
+	private static final long serialVersionUID = 1L;
+	
+	/** Array holding the attribute values for a particular key */
+	@SuppressWarnings("rawtypes")
 	private final Comparable[] key;
-
+	
 	/*************************************************************************************
 	 * Construct an instance of KeyType from a Comparable array.
 	 * 
-	 * @param _key
-	 *            the primary key
+	 * @param _key  the primary key
 	 */
+	@SuppressWarnings("rawtypes")
 	public KeyType(Comparable[] _key) {
 		key = _key;
 	} // constructor
-
+	
 	/*************************************************************************************
-	 * Construct an instance of KeyType from a Comparable variable argument
-	 * list.
+	 * Construct an instance of KeyType from a Comparable variable argument list.
 	 * 
-	 * @param key0
-	 *            the primary key
-	 * @param keys
-	 *            key array
+	 * @param key0  the primary key
+	 * @param keys  key array
 	 */
+	@SuppressWarnings("rawtypes")
 	public KeyType(Comparable key0, Comparable... keys) {
 		key = new Comparable[keys.length + 1];
 		key[0] = key0;
 		for (int i = 1; i < key.length; i++)
 			key[i] = keys[i - 1];
 	} // constructor
-
+	
 	/*************************************************************************************
-	 * Compare two keys (negative ={@literal >} less than, zero ={@literal >} equals, positive ={@literal >}
-	 * greater than).
+	 * Compare two keys (negative ={@literal >} less than, zero ={@literal >} equals, 
+	 * positive ={@literal >} greater than).
 	 * 
-	 * @param k
-	 *            the other key (to compare with this)
-	 * @return resultant integer that's negative, zero or positive
+	 * @param k  the other key (to compare with this)
+	 * @return   resultant integer that's negative, zero or positive
 	 */
 	@SuppressWarnings("unchecked")
 	public int compareTo(KeyType k) {
@@ -67,23 +64,22 @@ public class KeyType implements Comparable<KeyType>, Serializable {
 		} // for
 		return 0;
 	} // compareTo
-
+	
 	/*************************************************************************************
 	 * Determine whether two keys are equal (equals must agree with compareTo).
 	 * 
-	 * @param k
-	 *            the other key (to compare with this)
-	 * @return true if equal, false otherwise
+	 * @param k  the other key (to compare with this)
+	 * @return   true if equal, false otherwise
 	 */
 	public boolean equals(KeyType k) {
 		return compareTo(k) == 0;
 	} // equals
-
+	
 	/*************************************************************************************
 	 * Compute a hash code for this object (equal objects should produce the
 	 * same hash code).
 	 * 
-	 * @return an integer hash code value
+	 * @return  an integer hash code value
 	 */
 	public int hashCode() {
 		int sum = 0;
@@ -91,11 +87,11 @@ public class KeyType implements Comparable<KeyType>, Serializable {
 			sum = 7 * sum + key[i].hashCode();
 		return sum;
 	} // hashCode
-
+	
 	/*************************************************************************************
 	 * Convert the key to a string.
 	 * 
-	 * @return the string representation of the key
+	 * @return  the string representation of the key
 	 */
 	public String toString() {
 		String s = "Key (";
@@ -103,18 +99,17 @@ public class KeyType implements Comparable<KeyType>, Serializable {
 			s += " " + key[i];
 		return s + (" )");
 	} // toString
-
+	
 	/*************************************************************************************
 	 * The main method is used for testing purposes only.
 	 * 
-	 * @param args
-	 *            the command-line arguments
+	 * @param args  the command-line arguments
 	 */
 	public static void main(String[] args) {
 		KeyType key1 = new KeyType(new Comparable[] { "Star_Wars_2", 1980 });
 		KeyType key2 = new KeyType(new Comparable[] { "Rocky", 1985 });
 		KeyType key3 = new KeyType(new Comparable[] { "Star_Wars_2", 1980 });
-
+		
 		out.println();
 		out.println("Test the KeyClass");
 		out.println();
@@ -141,6 +136,4 @@ public class KeyType implements Comparable<KeyType>, Serializable {
 		out.println("key1.hashCode () == key3.hashCode (): "
 				+ (key1.hashCode() == key3.hashCode()));
 	} // main
-
 } // KeyType class
-

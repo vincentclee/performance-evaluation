@@ -1,8 +1,8 @@
 package csx370.impl;
 
 /*****************************************************************************************
- * @file   TupleGenerator.java
- * @author Sadiq Charaniya, John Miller
+ * @file    TupleGenerator.java
+ * @author  Sadiq Charaniya, John Miller
  */
 
 /*****************************************************************************************
@@ -38,8 +38,8 @@ public interface TupleGenerator {
 	/*************************************************************************************
 	 * Generate tuples for all of the tables.
 	 * @param   nTuples  the int array that contains the number of tuple for each table
-	 * @return  Comparable [i][j][k] 3D array, where 'i' is the table number,
-	 *          'j' is the tuple number and 'k' is the attribute number
+	 * @return           Comparable [i][j][k] 3D array, where 'i' is the table number,
+	 *                   'j' is the tuple number and 'k' is the attribute number
 	 */
 	@SuppressWarnings("rawtypes")
 	Comparable[][][] generate(int[] nTuples);
