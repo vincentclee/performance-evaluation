@@ -36,7 +36,6 @@ public class SelectTest {
 	private static Table Transcript_1000, Transcript_2000, Transcript_5000, Transcript_10000, Transcript_50000;
 	
 	/** Generated Random Data Storage */
-	//TODO: change to array list
 	@SuppressWarnings("rawtypes")
 	private static List<Comparable[]> Student_Data, Professor_Data, Course_Data, Teaching_Data, Transcript_Data;
 	
@@ -197,17 +196,20 @@ public class SelectTest {
 		assertEquals("Transcript Data Size", 50000, Transcript_Data.size());
 	}
 	
+	// ----------------------------------------------------------------------------------
+	// Student Tests
+	// ----------------------------------------------------------------------------------
+	
 	/**
-	 * 1000 Tuple Student Index Select
+	 * 1000 Tuple Student Index Select - 1 Key
 	 */
 	@SuppressWarnings("rawtypes")
-//	@Test
+	@Test
 	public void Student_1000_IndexedSelectTest() {
 		int counter = 0;
 		
 		//iterate through all tuples
 		for (Comparable[] instance : Student_Data) {
-			//Select Test TODO: verify size
 			Student_1000.select(new KeyType(instance[0]));
 			
 			//stop at 1000 iterations
@@ -218,17 +220,19 @@ public class SelectTest {
 	}
 	
 	/**
-	 * 1000 Tuple Student Select
+	 * 1000 Tuple Student Select - 3 Attributes ANDed
 	 */
 	@SuppressWarnings("rawtypes")
-//	@Test
+	@Test
 	public void Student_1000_SelectTest() {
 		int counter = 0;
 		
 		//iterate through all tuples
 		for (Comparable[] instance : Student_Data) {
 			//Select Test
-			Student_1000.select(t -> t[Student_1000.col("name")].equals(instance[1]));
+			Student_1000.select(t -> t[Student_1000.col("name")].equals(instance[1]) && 
+					t[Student_1000.col("address")].equals(instance[2]) && 
+					t[Student_1000.col("status")].equals(instance[3]));
 			
 			//stop at 1000 iterations
 			if (++counter == 1000) {
@@ -238,10 +242,10 @@ public class SelectTest {
 	}
 	
 	/**
-	 * 2000 Tuple Student Index Select
+	 * 2000 Tuple Student Index Select - 1 Key
 	 */
 	@SuppressWarnings("rawtypes")
-//	@Test
+	@Test
 	public void Student_2000_IndexedSelectTest() {
 		int counter = 0;
 		
@@ -258,17 +262,19 @@ public class SelectTest {
 	}
 	
 	/**
-	 * 2000 Tuple Student Select
+	 * 2000 Tuple Student Select - 3 Attributes ANDed
 	 */
 	@SuppressWarnings("rawtypes")
-//	@Test
+	@Test
 	public void Student_2000_SelectTest() {
 		int counter = 0;
 		
 		//iterate through all tuples
 		for (Comparable[] instance : Student_Data) {
 			//Select Test
-			Student_2000.select(t -> t[Student_2000.col("name")].equals(instance[1]));
+			Student_2000.select(t -> t[Student_2000.col("name")].equals(instance[1]) && 
+					t[Student_2000.col("address")].equals(instance[2]) && 
+					t[Student_2000.col("status")].equals(instance[3]));
 			
 			//stop at 2000 iterations
 			if (++counter == 2000) {
@@ -278,10 +284,10 @@ public class SelectTest {
 	}
 	
 	/**
-	 * 5000 Tuple Student Index Select
+	 * 5000 Tuple Student Index Select - 1 Key
 	 */
 	@SuppressWarnings("rawtypes")
-//	@Test
+	@Test
 	public void Student_5000_IndexedSelectTest() {
 		int counter = 0;
 		
@@ -298,17 +304,19 @@ public class SelectTest {
 	}
 	
 	/**
-	 * 5000 Tuple Student Select
+	 * 5000 Tuple Student Select - 3 Attributes ANDed
 	 */
 	@SuppressWarnings("rawtypes")
-//	@Test
+	@Test
 	public void Student_5000_SelectTest() {
 		int counter = 0;
 		
 		//iterate through all tuples
 		for (Comparable[] instance : Student_Data) {
 			//Select Test
-			Student_5000.select(t -> t[Student_5000.col("name")].equals(instance[1]));
+			Student_5000.select(t -> t[Student_5000.col("name")].equals(instance[1]) && 
+					t[Student_5000.col("address")].equals(instance[2]) && 
+					t[Student_5000.col("status")].equals(instance[3]));
 			
 			//stop at 5000 iterations
 			if (++counter == 5000) {
@@ -318,10 +326,10 @@ public class SelectTest {
 	}
 	
 	/**
-	 * 10000 Tuple Student Index Select
+	 * 10000 Tuple Student Index Select - 1 Key
 	 */
 	@SuppressWarnings("rawtypes")
-//	@Test
+	@Test
 	public void Student_10000_IndexedSelectTest() {
 		int counter = 0;
 		
@@ -338,17 +346,19 @@ public class SelectTest {
 	}
 	
 	/**
-	 * 10000 Tuple Student Select
+	 * 10000 Tuple Student Select - 3 Attributes ANDed
 	 */
 	@SuppressWarnings("rawtypes")
-//	@Test
+	@Test
 	public void Student_10000_SelectTest() {
 		int counter = 0;
 		
 		//iterate through all tuples
 		for (Comparable[] instance : Student_Data) {
 			//Select Test
-			Student_10000.select(t -> t[Student_10000.col("name")].equals(instance[1]));
+			Student_10000.select(t -> t[Student_10000.col("name")].equals(instance[1]) && 
+					t[Student_10000.col("address")].equals(instance[2]) && 
+					t[Student_10000.col("status")].equals(instance[3]));
 			
 			//stop at 10000 iterations
 			if (++counter == 10000) {
@@ -358,10 +368,10 @@ public class SelectTest {
 	}
 	
 	/**
-	 * 50000 Tuple Student Index Select
+	 * 50000 Tuple Student Index Select - 1 Key
 	 */
 	@SuppressWarnings("rawtypes")
-//	@Test
+	@Test
 	public void Student_50000_IndexedSelectTest() {
 		//iterate through all tuples
 		for (Comparable[] instance : Student_Data) {
@@ -371,7 +381,7 @@ public class SelectTest {
 	}
 	
 	/**
-	 * 50000 Tuple Student Select
+	 * 50000 Tuple Student Select - 3 Attributes ANDed
 	 */
 	@SuppressWarnings("rawtypes")
 	@Test
@@ -379,7 +389,780 @@ public class SelectTest {
 		//iterate through all tuples
 		for (Comparable[] instance : Student_Data) {
 			//Select Test
-			Student_50000.select(t -> t[Student_50000.col("name")].equals(instance[1]) /*&& t[Student_50000.col("address")].equals(instance[2])*/);
+			Student_50000.select(t -> t[Student_50000.col("name")].equals(instance[1]) && 
+					t[Student_50000.col("address")].equals(instance[2]) && 
+					t[Student_50000.col("status")].equals(instance[3]));
+		}
+	}
+	
+	// ----------------------------------------------------------------------------------
+	// Professor Tests
+	// ----------------------------------------------------------------------------------
+	
+	/**
+	 * 1000 Tuple Professor Index Select - 1 Key
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Professor_1000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Professor_Data) {
+			Professor_1000.select(new KeyType(instance[0]));
+			
+			//stop at 1000 iterations
+			if (++counter == 1000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 1000 Tuple Professor Select - 2 Attributes ANDed
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Professor_1000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Professor_Data) {
+			//Select Test
+			Professor_1000.select(t -> t[Professor_1000.col("name")].equals(instance[1]) && 
+					t[Professor_1000.col("deptId")].equals(instance[2]));
+			
+			//stop at 1000 iterations
+			if (++counter == 1000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 2000 Tuple Professor Index Select - 1 Key
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Professor_2000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Professor_Data) {
+			//Select Test
+			Professor_2000.select(new KeyType(instance[0]));
+			
+			//stop at 2000 iterations
+			if (++counter == 2000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 2000 Tuple Professor Select - 2 Attributes ANDed
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Professor_2000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Professor_Data) {
+			//Select Test
+			Professor_2000.select(t -> t[Professor_2000.col("name")].equals(instance[1]) && 
+					t[Professor_2000.col("deptId")].equals(instance[2]));
+			
+			//stop at 2000 iterations
+			if (++counter == 2000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 5000 Tuple Professor Index Select - 1 Key
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Professor_5000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Professor_Data) {
+			//Select Test
+			Professor_5000.select(new KeyType(instance[0]));
+			
+			//stop at 5000 iterations
+			if (++counter == 5000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 5000 Tuple Professor Select - 2 Attributes ANDed
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Professor_5000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Professor_Data) {
+			//Select Test
+			Professor_5000.select(t -> t[Professor_5000.col("name")].equals(instance[1]) && 
+					t[Professor_5000.col("deptId")].equals(instance[2]));
+			
+			//stop at 5000 iterations
+			if (++counter == 5000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 10000 Tuple Professor Index Select - 1 Key
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Professor_10000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Professor_Data) {
+			//Select Test
+			Professor_10000.select(new KeyType(instance[0]));
+			
+			//stop at 10000 iterations
+			if (++counter == 10000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 10000 Tuple Professor Select - 2 Attributes ANDed
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Professor_10000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Professor_Data) {
+			//Select Test
+			Professor_10000.select(t -> t[Professor_10000.col("name")].equals(instance[1]) && 
+					t[Professor_10000.col("deptId")].equals(instance[2]));
+			
+			//stop at 10000 iterations
+			if (++counter == 10000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 50000 Tuple Professor Index Select - 1 Key
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Professor_50000_IndexedSelectTest() {
+		//iterate through all tuples
+		for (Comparable[] instance : Professor_Data) {
+			//Select Test
+			Professor_50000.select(new KeyType(instance[0]));
+		}
+	}
+	
+	/**
+	 * 50000 Tuple Professor Select - 2 Attributes ANDed
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Professor_50000_SelectTest() {
+		//iterate through all tuples
+		for (Comparable[] instance : Professor_Data) {
+			//Select Test
+			Professor_50000.select(t -> t[Professor_50000.col("name")].equals(instance[1]) && 
+					t[Professor_50000.col("deptId")].equals(instance[2]));
+		}
+	}
+	
+	// ----------------------------------------------------------------------------------
+	// Course Tests
+	// ----------------------------------------------------------------------------------
+	
+	/**
+	 * 1000 Tuple Course Index Select - 1 Key
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Course_1000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Course_Data) {
+			Course_1000.select(new KeyType(instance[0]));
+			
+			//stop at 1000 iterations
+			if (++counter == 1000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 1000 Tuple Course Select - 3 Attributes ANDed
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Course_1000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Course_Data) {
+			//Select Test
+			Course_1000.select(t -> t[Course_1000.col("deptId")].equals(instance[1]) && 
+					t[Course_1000.col("crsName")].equals(instance[2]) && 
+					t[Course_1000.col("descr")].equals(instance[3]));
+			
+			//stop at 1000 iterations
+			if (++counter == 1000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 2000 Tuple Course Index Select - 1 Key
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Course_2000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Course_Data) {
+			//Select Test
+			Course_2000.select(new KeyType(instance[0]));
+			
+			//stop at 2000 iterations
+			if (++counter == 2000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 2000 Tuple Course Select - 3 Attributes ANDed
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Course_2000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Course_Data) {
+			//Select Test
+			Course_2000.select(t -> t[Course_2000.col("deptId")].equals(instance[1]) && 
+					t[Course_2000.col("crsName")].equals(instance[2]) && 
+					t[Course_2000.col("descr")].equals(instance[3]));
+			
+			//stop at 2000 iterations
+			if (++counter == 2000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 5000 Tuple Course Index Select - 1 Key
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Course_5000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Course_Data) {
+			//Select Test
+			Course_5000.select(new KeyType(instance[0]));
+			
+			//stop at 5000 iterations
+			if (++counter == 5000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 5000 Tuple Course Select - 3 Attributes ANDed
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Course_5000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Course_Data) {
+			//Select Test
+			Course_5000.select(t -> t[Course_5000.col("deptId")].equals(instance[1]) && 
+					t[Course_5000.col("crsName")].equals(instance[2]) && 
+					t[Course_5000.col("descr")].equals(instance[3]));
+			
+			//stop at 5000 iterations
+			if (++counter == 5000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 10000 Tuple Course Index Select - 1 Key
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Course_10000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Course_Data) {
+			//Select Test
+			Course_10000.select(new KeyType(instance[0]));
+			
+			//stop at 10000 iterations
+			if (++counter == 10000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 10000 Tuple Course Select - 3 Attributes ANDed
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Course_10000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Course_Data) {
+			//Select Test
+			Course_10000.select(t -> t[Course_10000.col("deptId")].equals(instance[1]) && 
+					t[Course_10000.col("crsName")].equals(instance[2]) && 
+					t[Course_10000.col("descr")].equals(instance[3]));
+			
+			//stop at 10000 iterations
+			if (++counter == 10000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 50000 Tuple Course Index Select - 1 Key
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Course_50000_IndexedSelectTest() {
+		//iterate through all tuples
+		for (Comparable[] instance : Course_Data) {
+			//Select Test
+			Course_50000.select(new KeyType(instance[0]));
+		}
+	}
+	
+	/**
+	 * 50000 Tuple Course Select - 3 Attributes ANDed
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Course_50000_SelectTest() {
+		//iterate through all tuples
+		for (Comparable[] instance : Course_Data) {
+			//Select Test
+			Course_50000.select(t -> t[Course_50000.col("deptId")].equals(instance[1]) && 
+					t[Course_50000.col("crsName")].equals(instance[2]) && 
+					t[Course_50000.col("descr")].equals(instance[3]));
+		}
+	}
+	
+	// ----------------------------------------------------------------------------------
+	// Teaching Tests
+	// ----------------------------------------------------------------------------------
+	
+	/**
+	 * 1000 Tuple Teaching Index Select - 2 Keys
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Teaching_1000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Teaching_Data) {
+			Teaching_1000.select(new KeyType(instance[0], instance[1]));
+			
+			//stop at 1000 iterations
+			if (++counter == 1000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 1000 Tuple Teaching Select - 1 Attribute
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Teaching_1000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Teaching_Data) {
+			//Select Test
+			Teaching_1000.select(t -> t[Teaching_1000.col("profId")].equals(instance[2]));
+			
+			//stop at 1000 iterations
+			if (++counter == 1000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 2000 Tuple Teaching Index Select - 2 Keys
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Teaching_2000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Teaching_Data) {
+			//Select Test
+			Teaching_2000.select(new KeyType(instance[0], instance[1]));
+			
+			//stop at 2000 iterations
+			if (++counter == 2000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 2000 Tuple Teaching Select - 1 Attributes
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Teaching_2000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Teaching_Data) {
+			//Select Test
+			Teaching_2000.select(t -> t[Teaching_2000.col("profId")].equals(instance[2]));
+			
+			//stop at 2000 iterations
+			if (++counter == 2000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 5000 Tuple Teaching Index Select - 2 Keys
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Teaching_5000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Teaching_Data) {
+			//Select Test
+			Teaching_5000.select(new KeyType(instance[0], instance[1]));
+			
+			//stop at 5000 iterations
+			if (++counter == 5000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 5000 Tuple Teaching Select - 1 Attribute
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Teaching_5000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Teaching_Data) {
+			//Select Test
+			Teaching_5000.select(t -> t[Teaching_5000.col("profId")].equals(instance[2]));
+			
+			//stop at 5000 iterations
+			if (++counter == 5000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 10000 Tuple Teaching Index Select - 2 Keys
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Teaching_10000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Teaching_Data) {
+			//Select Test
+			Teaching_10000.select(new KeyType(instance[0], instance[1]));
+			
+			//stop at 10000 iterations
+			if (++counter == 10000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 10000 Tuple Teaching Select - 1 Attribute
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Teaching_10000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Teaching_Data) {
+			//Select Test
+			Teaching_10000.select(t -> t[Teaching_10000.col("profId")].equals(instance[2]));
+			
+			//stop at 10000 iterations
+			if (++counter == 10000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 50000 Tuple Teaching Index Select - 2 Keys
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Teaching_50000_IndexedSelectTest() {
+		//iterate through all tuples
+		for (Comparable[] instance : Teaching_Data) {
+			//Select Test
+			Teaching_50000.select(new KeyType(instance[0], instance[1]));
+		}
+	}
+	
+	/**
+	 * 50000 Tuple Teaching Select - 1 Attribute
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Teaching_50000_SelectTest() {
+		//iterate through all tuples
+		for (Comparable[] instance : Teaching_Data) {
+			//Select Test
+			Teaching_50000.select(t -> t[Teaching_50000.col("profId")].equals(instance[2]));
+		}
+	}
+	
+	// ----------------------------------------------------------------------------------
+	// Transcript Tests
+	// ----------------------------------------------------------------------------------
+	
+	/**
+	 * 1000 Tuple Transcript Index Select - 3 Keys
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Transcript_1000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Transcript_Data) {
+			Transcript_1000.select(new KeyType(instance[0], instance[1], instance[2]));
+			
+			//stop at 1000 iterations
+			if (++counter == 1000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 1000 Tuple Transcript Select - 1 Attribute
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Transcript_1000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Transcript_Data) {
+			//Select Test
+			Transcript_1000.select(t -> t[Transcript_1000.col("grade")].equals(instance[3]));
+			
+			//stop at 1000 iterations
+			if (++counter == 1000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 2000 Tuple Transcript Index Select - 3 Keys
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Transcript_2000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Transcript_Data) {
+			//Select Test
+			Transcript_2000.select(new KeyType(instance[0], instance[1], instance[2]));
+			
+			//stop at 2000 iterations
+			if (++counter == 2000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 2000 Tuple Transcript Select - 1 Attribute
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Transcript_2000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Transcript_Data) {
+			//Select Test
+			Transcript_2000.select(t -> t[Transcript_2000.col("grade")].equals(instance[3]));
+			
+			//stop at 2000 iterations
+			if (++counter == 2000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 5000 Tuple Transcript Index Select - 3 Keys
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Transcript_5000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Transcript_Data) {
+			//Select Test
+			Transcript_5000.select(new KeyType(instance[0], instance[1], instance[2]));
+			
+			//stop at 5000 iterations
+			if (++counter == 5000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 5000 Tuple Transcript Select - 1 Attribute
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Transcript_5000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Transcript_Data) {
+			//Select Test
+			Transcript_5000.select(t -> t[Transcript_5000.col("grade")].equals(instance[3]));
+			
+			//stop at 5000 iterations
+			if (++counter == 5000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 10000 Tuple Transcript Index Select - 3 Keys
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Transcript_10000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Transcript_Data) {
+			//Select Test
+			Transcript_10000.select(new KeyType(instance[0], instance[1], instance[2]));
+			
+			//stop at 10000 iterations
+			if (++counter == 10000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 10000 Tuple Transcript Select - 1 Attribute
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Transcript_10000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Transcript_Data) {
+			//Select Test
+			Transcript_10000.select(t -> t[Transcript_10000.col("grade")].equals(instance[3]));
+			
+			//stop at 10000 iterations
+			if (++counter == 10000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 50000 Tuple Transcript Index Select - 3 Keys
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Transcript_50000_IndexedSelectTest() {
+		//iterate through all tuples
+		for (Comparable[] instance : Transcript_Data) {
+			//Select Test
+			Transcript_50000.select(new KeyType(instance[0], instance[1], instance[2]));
+		}
+	}
+	
+	/**
+	 * 50000 Tuple Transcript Select - 1 Attribute
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Transcript_50000_SelectTest() {
+		//iterate through all tuples
+		for (Comparable[] instance : Transcript_Data) {
+			//Select Test
+			Transcript_50000.select(t -> t[Transcript_50000.col("grade")].equals(instance[3]));
 		}
 	}
 }
