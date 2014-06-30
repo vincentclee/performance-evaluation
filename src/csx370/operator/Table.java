@@ -8,6 +8,7 @@ package csx370.operator;
 import java.io.*;
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.Collectors;
 
 import static java.lang.System.out;
 import static java.lang.System.err;
@@ -192,16 +193,9 @@ public class Table implements Serializable {
 		
 		List<Comparable[]> rows = null;
 		
-		// Intialize data structure
-		rows = new ArrayList<Comparable[]>();
+		// Parallel Reduction with predicate filter
+		rows = tuples.parallelStream().filter(predicate).collect(Collectors.toList());
 		
-		// Iterate through tuples
-		for (Map.Entry<KeyType, Comparable[]> e : index.entrySet())
-			// do a predicate test on the tuple
-			// add matches into the List
-			if (predicate.test(e.getValue())) {
-				rows.add(e.getValue());
-			}
 		return new Table(name + count++, attribute, domain, key, rows);
 	} // select
 	

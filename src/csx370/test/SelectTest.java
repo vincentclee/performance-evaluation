@@ -2,18 +2,24 @@ package csx370.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import csx370.impl.TupleGenerator;
 import csx370.impl.TupleGeneratorImpl;
+import csx370.operator.KeyType;
 import csx370.operator.Table;
 
 /**
- * @author vincentlee
- *
+ * Tests for sequential select vs. indexed select
  */
-public class SequentialSelectTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class SelectTest {
 	/** Student Tables */
 	private static Table Student_1000, Student_2000, Student_5000, Student_10000, Student_50000;
 	
@@ -29,12 +35,25 @@ public class SequentialSelectTest {
 	/** Transcript Tables */
 	private static Table Transcript_1000, Transcript_2000, Transcript_5000, Transcript_10000, Transcript_50000;
 	
+	/** Generated Random Data Storage */
+	//TODO: change to array list
+	@SuppressWarnings("rawtypes")
+	private static List<Comparable[]> Student_Data, Professor_Data, Course_Data, Teaching_Data, Transcript_Data;
+	
 	/**
 	 * Set up Tables and Data
 	 */
 	@SuppressWarnings("rawtypes")
 	@BeforeClass
 	public static void setUpBeforeClass() {
+		//Create Random Data Storage
+		Student_Data = new ArrayList<Comparable[]>();
+		Professor_Data = new ArrayList<Comparable[]>();
+		Course_Data = new ArrayList<Comparable[]>();
+		Teaching_Data = new ArrayList<Comparable[]>();
+		Transcript_Data = new ArrayList<Comparable[]>();
+		
+		
 		//Create Tables
 		Student_1000 = new Table("Student", "id name address status", "Integer String String String", "id");
 		Student_2000 = new Table("Student", "id name address status", "Integer String String String", "id");
@@ -67,20 +86,20 @@ public class SequentialSelectTest {
 		Transcript_50000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester");
 		
 		
-		
-		
-		
-		
+		//Generate Data for those tuples
 		TupleGenerator test = new TupleGeneratorImpl();
 		
+		//Schemas
 		test.addRelSchema("Student", "id name address status", "Integer String String String", "id", null);
 		test.addRelSchema("Professor", "id name deptId", "Integer String String", "id", null);
 		test.addRelSchema("Course", "crsCode deptId crsName descr", "String String String String", "crsCode", null);
 		test.addRelSchema("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester", null);
 		test.addRelSchema("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester", null);
 		
+		//Tuple sizes (all 50,000)
 		int[] tups = new int[]{50000, 50000, 50000, 50000, 50000};
 		
+		//Generate random data
 		Comparable[][][] resultTest = test.generate(tups);
 		
 		//Student Tables
@@ -90,6 +109,7 @@ public class SequentialSelectTest {
 			if (i < 5000) {Student_5000.insert(resultTest[0][i]);}
 			if (i < 10000) {Student_10000.insert(resultTest[0][i]);}
 			Student_50000.insert(resultTest[0][i]);
+			Student_Data.add(resultTest[0][i]);
 		}
 		//Professor Tables
 		for (int i = 0; i < resultTest[1].length; i++) {
@@ -98,6 +118,7 @@ public class SequentialSelectTest {
 			if (i < 5000) {Professor_5000.insert(resultTest[1][i]);}
 			if (i < 10000) {Professor_10000.insert(resultTest[1][i]);}
 			Professor_50000.insert(resultTest[1][i]);
+			Professor_Data.add(resultTest[1][i]);
 		}
 		//Course Tables
 		for (int i = 0; i < resultTest[2].length; i++) {
@@ -106,6 +127,7 @@ public class SequentialSelectTest {
 			if (i < 5000) {Course_5000.insert(resultTest[2][i]);}
 			if (i < 10000) {Course_10000.insert(resultTest[2][i]);}
 			Course_50000.insert(resultTest[2][i]);
+			Course_Data.add(resultTest[2][i]);
 		}
 		//Teaching Tables
 		for (int i = 0; i < resultTest[3].length; i++) {
@@ -114,6 +136,7 @@ public class SequentialSelectTest {
 			if (i < 5000) {Teaching_5000.insert(resultTest[3][i]);}
 			if (i < 10000) {Teaching_10000.insert(resultTest[3][i]);}
 			Teaching_50000.insert(resultTest[3][i]);
+			Teaching_Data.add(resultTest[3][i]);
 		}
 		//Transcript Tables
 		for (int i = 0; i < resultTest[4].length; i++) {
@@ -122,25 +145,8 @@ public class SequentialSelectTest {
 			if (i < 5000) {Transcript_5000.insert(resultTest[4][i]);}
 			if (i < 10000) {Transcript_10000.insert(resultTest[4][i]);}
 			Transcript_50000.insert(resultTest[4][i]);
+			Transcript_Data.add(resultTest[4][i]);
 		}
-	}
-	
-//	@Test
-	public void test() {
-		Student_1000.print();
-		Student_2000.print();
-		
-		Professor_1000.print();
-		Professor_2000.print();
-		
-		Course_1000.print();
-		Course_2000.print();
-		
-		Transcript_1000.print();
-		Transcript_2000.print();
-		
-		Teaching_1000.print();
-		Teaching_2000.print();
 	}
 	
 	/**
@@ -182,5 +188,198 @@ public class SequentialSelectTest {
 		assertEquals("Transcript Table Size", 5000, Transcript_5000.size());
 		assertEquals("Transcript Table Size", 10000, Transcript_10000.size());
 		assertEquals("Transcript Table Size", 50000, Transcript_50000.size());
+		
+		//Generated Random Data
+		assertEquals("Student Data Size", 50000, Student_Data.size());
+		assertEquals("Professor Data Size", 50000, Professor_Data.size());
+		assertEquals("Course Data Size", 50000, Course_Data.size());
+		assertEquals("Teaching Data Size", 50000, Teaching_Data.size());
+		assertEquals("Transcript Data Size", 50000, Transcript_Data.size());
+	}
+	
+	/**
+	 * 1000 Tuple Student Index Select
+	 */
+	@SuppressWarnings("rawtypes")
+//	@Test
+	public void Student_1000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Student_Data) {
+			//Select Test TODO: verify size
+			Student_1000.select(new KeyType(instance[0]));
+			
+			//stop at 1000 iterations
+			if (++counter == 1000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 1000 Tuple Student Select
+	 */
+	@SuppressWarnings("rawtypes")
+//	@Test
+	public void Student_1000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Student_Data) {
+			//Select Test
+			Student_1000.select(t -> t[Student_1000.col("name")].equals(instance[1]));
+			
+			//stop at 1000 iterations
+			if (++counter == 1000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 2000 Tuple Student Index Select
+	 */
+	@SuppressWarnings("rawtypes")
+//	@Test
+	public void Student_2000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Student_Data) {
+			//Select Test
+			Student_2000.select(new KeyType(instance[0]));
+			
+			//stop at 2000 iterations
+			if (++counter == 2000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 2000 Tuple Student Select
+	 */
+	@SuppressWarnings("rawtypes")
+//	@Test
+	public void Student_2000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Student_Data) {
+			//Select Test
+			Student_2000.select(t -> t[Student_2000.col("name")].equals(instance[1]));
+			
+			//stop at 2000 iterations
+			if (++counter == 2000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 5000 Tuple Student Index Select
+	 */
+	@SuppressWarnings("rawtypes")
+//	@Test
+	public void Student_5000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Student_Data) {
+			//Select Test
+			Student_5000.select(new KeyType(instance[0]));
+			
+			//stop at 5000 iterations
+			if (++counter == 5000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 5000 Tuple Student Select
+	 */
+	@SuppressWarnings("rawtypes")
+//	@Test
+	public void Student_5000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Student_Data) {
+			//Select Test
+			Student_5000.select(t -> t[Student_5000.col("name")].equals(instance[1]));
+			
+			//stop at 5000 iterations
+			if (++counter == 5000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 10000 Tuple Student Index Select
+	 */
+	@SuppressWarnings("rawtypes")
+//	@Test
+	public void Student_10000_IndexedSelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Student_Data) {
+			//Select Test
+			Student_10000.select(new KeyType(instance[0]));
+			
+			//stop at 10000 iterations
+			if (++counter == 10000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 10000 Tuple Student Select
+	 */
+	@SuppressWarnings("rawtypes")
+//	@Test
+	public void Student_10000_SelectTest() {
+		int counter = 0;
+		
+		//iterate through all tuples
+		for (Comparable[] instance : Student_Data) {
+			//Select Test
+			Student_10000.select(t -> t[Student_10000.col("name")].equals(instance[1]));
+			
+			//stop at 10000 iterations
+			if (++counter == 10000) {
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 50000 Tuple Student Index Select
+	 */
+	@SuppressWarnings("rawtypes")
+//	@Test
+	public void Student_50000_IndexedSelectTest() {
+		//iterate through all tuples
+		for (Comparable[] instance : Student_Data) {
+			//Select Test
+			Student_50000.select(new KeyType(instance[0]));
+		}
+	}
+	
+	/**
+	 * 50000 Tuple Student Select
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void Student_50000_SelectTest() {
+		//iterate through all tuples
+		for (Comparable[] instance : Student_Data) {
+			//Select Test
+			Student_50000.select(t -> t[Student_50000.col("name")].equals(instance[1]) /*&& t[Student_50000.col("address")].equals(instance[2])*/);
+		}
 	}
 }
