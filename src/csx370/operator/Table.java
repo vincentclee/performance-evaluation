@@ -25,6 +25,8 @@ import static java.lang.System.err;
  * operators.
  */
 public class Table implements Serializable {
+	private static final boolean CONSOLE_OUTPUT = false;
+	
 	/**
 	 * Relative path for storage directory
 	 */
@@ -138,7 +140,9 @@ public class Table implements Serializable {
 		this(name, attributes.split(" "), findClass(domains.split(" ")), _key
 				.split(" "));
 
-		out.println("DDL> create table " + name + " (" + attributes + ")");
+		if (CONSOLE_OUTPUT) {
+			out.println("DDL> create table " + name + " (" + attributes + ")");
+		}
 	} // constructor
 
 	// ----------------------------------------------------------------------------------
@@ -156,7 +160,9 @@ public class Table implements Serializable {
 	 * @return a table of projected tuples
 	 */
 	public Table project(String attributes) {
-		out.println("RA> " + name + ".project (" + attributes + ")");
+		if (CONSOLE_OUTPUT) {
+			out.println("RA> " + name + ".project (" + attributes + ")");
+		}
 		String[] attrs = attributes.split(" ");
 		Class[] colDomain = extractDom(match(attrs), domain);
 		String[] newKey = (Arrays.asList(attrs).containsAll(Arrays.asList(key))) ? key
@@ -206,7 +212,9 @@ public class Table implements Serializable {
 	 * @return a table with tuples satisfying the predicate
 	 */
 	public Table select(Predicate<Comparable[]> predicate) {
-		out.println("RA> " + name + ".select (" + predicate + ")");
+		if (CONSOLE_OUTPUT) {
+			out.println("RA> " + name + ".select (" + predicate + ")");
+		}
 
 		List<Comparable[]> rows = null;
 
@@ -232,7 +240,9 @@ public class Table implements Serializable {
 	 * @return a table with the tuple satisfying the key predicate
 	 */
 	public Table select(KeyType keyVal) {
-		out.println("RA> " + name + ".select (" + keyVal + ")");
+		if (CONSOLE_OUTPUT) {
+			out.println("RA> " + name + ".select (" + keyVal + ")");
+		}
 
 		List<Comparable[]> rows = null;
 
@@ -255,7 +265,9 @@ public class Table implements Serializable {
 	 * @return a table representing the union
 	 */
 	public Table union(Table table2) {
-		out.println("RA> " + name + ".union (" + table2.name + ")");
+		if (CONSOLE_OUTPUT) {
+			out.println("RA> " + name + ".union (" + table2.name + ")");
+		}
 		
 		if (!compatible(table2)) {
 			return null;
@@ -290,7 +302,9 @@ public class Table implements Serializable {
 	 * @return a table representing the difference
 	 */
 	public Table minus(Table table2) {
-		out.println("RA> " + name + ".minus (" + table2.name + ")");
+		if (CONSOLE_OUTPUT) {
+			out.println("RA> " + name + ".minus (" + table2.name + ")");
+		}
 		
 		if (!compatible(table2)) {
 			return null;
@@ -345,8 +359,9 @@ public class Table implements Serializable {
 	 * @return a table with tuples satisfying the equality predicate
 	 */
 	public Table join(String attribute1, String attribute2, Table table2) {
-		out.println("RA> " + name + ".join (" + attribute1 + ", "
-				+ attribute2 + ", " + table2.name + ")");
+		if (CONSOLE_OUTPUT) {
+			out.println("RA> " + name + ".join (" + attribute1 + ", " + attribute2 + ", " + table2.name + ")");
+		}
 
 		String[] t_attrs = attribute1.split(" ");
 		String[] u_attrs = attribute2.split(" ");
@@ -412,8 +427,9 @@ public class Table implements Serializable {
 	 * @return whether insertion was successful
 	 */
 	public boolean insert(Comparable[] tup) {
-		out.println("DML> insert into " + name + " values ( "
-				+ Arrays.toString(tup) + " )");
+		if (CONSOLE_OUTPUT) {
+			out.println("DML> insert into " + name + " values ( " + Arrays.toString(tup) + " )");
+		}
 
 		if (typeCheck(tup, this.domain)) {
 			tuples.add(tup);
