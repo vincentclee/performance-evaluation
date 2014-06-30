@@ -42,7 +42,7 @@ public class TestTupleGenerator {
 		test.addRelSchema("Teaching",
 				"crsCode semester profId",
 				"String String Integer",
-				"crcCode semester",
+				"crsCode semester",
 				new String[][]{{"profId", "Professor", "id"},
 				{"crsCode", "Course", "crsCode"}});
 		
@@ -64,7 +64,10 @@ public class TestTupleGenerator {
 			out.println(tables[i]);
 			for (int j = 0; j < resultTest[i].length; j++) {
 				for (int k = 0; k < resultTest[i][j].length; k++) {
-					out.print(resultTest[i][j][k] + ",");
+					out.print(resultTest[i][j][k]);
+					if (k < resultTest[i][j].length-1) {
+						out.print(",");
+					}
 				} //for
 				out.println();
 			} //for
