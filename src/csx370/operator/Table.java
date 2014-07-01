@@ -124,6 +124,15 @@ public class Table implements Serializable {
 	 * @param domains    the string containing attribute domains (data types)
 	 * @param _key       the string containing table key
 	 */
+	public Table(String name, String attributes, String domains, String _key) {
+		this(name, attributes.split(" "), findClass(domains.split(" ")), _key
+				.split(" "), "TreeMap");
+		
+		if (CONSOLE_OUTPUT) {
+			out.println("DDL> create table " + name + " (" + attributes + ")");
+		}
+	} // constructor
+	
 	public Table(String name, String attributes, String domains, String _key, String structure) {
 		this(name, attributes.split(" "), findClass(domains.split(" ")), _key
 				.split(" "), structure);
