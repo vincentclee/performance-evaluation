@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="INSERT-NEW-ONE-HERE" name="performance-evaluation">
+<project basedir="." default="test" name="performance-evaluation">
 	<property name="junit.output.dir" value="junit"/>
 		<path id="JUnit4.libraryclasspath">
 			<pathelement location="lib/junit-4.11.jar"/>
@@ -30,7 +30,7 @@
 		<mkdir dir="${junit.output.dir}"/>
 		<junit fork="yes" printsummary="on">
 			<formatter type="xml"/>
-			<test name="csx370.test.BpTreeMapTest" todir="${junit.output.dir}"/>
+			<test name="csx370.test.SelectBpTreeMapTest" todir="${junit.output.dir}"/>
 			<classpath refid="csx370.classpath"/>
 		</junit>
 	</target>
