@@ -16,10 +16,10 @@ import csx370.operator.KeyType;
 import csx370.operator.Table;
 
 /**
- * Tests for sequential select vs. indexed select
+ * Tests for sequential select vs. indexed select using the Linear Hash Map
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SelectTest {
+public class SelectLinHashMapTest {
 	/** Student Tables */
 	private static Table Student_1000, Student_2000, Student_5000, Student_10000, Student_50000;
 	
@@ -54,35 +54,35 @@ public class SelectTest {
 		
 		
 		//Create Tables
-		Student_1000 = new Table("Student", "id name address status", "Integer String String String", "id");
-		Student_2000 = new Table("Student", "id name address status", "Integer String String String", "id");
-		Student_5000 = new Table("Student", "id name address status", "Integer String String String", "id");
-		Student_10000 = new Table("Student", "id name address status", "Integer String String String", "id");
-		Student_50000 = new Table("Student", "id name address status", "Integer String String String", "id");
+		Student_1000 = new Table("Student", "id name address status", "Integer String String String", "id", "LinHashMap");
+		Student_2000 = new Table("Student", "id name address status", "Integer String String String", "id", "LinHashMap");
+		Student_5000 = new Table("Student", "id name address status", "Integer String String String", "id", "LinHashMap");
+		Student_10000 = new Table("Student", "id name address status", "Integer String String String", "id", "LinHashMap");
+		Student_50000 = new Table("Student", "id name address status", "Integer String String String", "id", "LinHashMap");
 		
-		Professor_1000 = new Table("Professor", "id name deptId", "Integer String String", "id");
-		Professor_2000 = new Table("Professor", "id name deptId", "Integer String String", "id");
-		Professor_5000 = new Table("Professor", "id name deptId", "Integer String String", "id");
-		Professor_10000 = new Table("Professor", "id name deptId", "Integer String String", "id");
-		Professor_50000 = new Table("Professor", "id name deptId", "Integer String String", "id");
+		Professor_1000 = new Table("Professor", "id name deptId", "Integer String String", "id", "LinHashMap");
+		Professor_2000 = new Table("Professor", "id name deptId", "Integer String String", "id", "LinHashMap");
+		Professor_5000 = new Table("Professor", "id name deptId", "Integer String String", "id", "LinHashMap");
+		Professor_10000 = new Table("Professor", "id name deptId", "Integer String String", "id", "LinHashMap");
+		Professor_50000 = new Table("Professor", "id name deptId", "Integer String String", "id", "LinHashMap");
 		
-		Course_1000 = new Table("Course", "crsCode deptId crsName descr", "String String String String", "crsCode");
-		Course_2000 = new Table("Course", "crsCode deptId crsName descr", "String String String String", "crsCode");
-		Course_5000 = new Table("Course", "crsCode deptId crsName descr", "String String String String", "crsCode");
-		Course_10000 = new Table("Course", "crsCode deptId crsName descr", "String String String String", "crsCode");
-		Course_50000 = new Table("Course", "crsCode deptId crsName descr", "String String String String", "crsCode");
+		Course_1000 = new Table("Course", "crsCode deptId crsName descr", "String String String String", "crsCode", "LinHashMap");
+		Course_2000 = new Table("Course", "crsCode deptId crsName descr", "String String String String", "crsCode", "LinHashMap");
+		Course_5000 = new Table("Course", "crsCode deptId crsName descr", "String String String String", "crsCode", "LinHashMap");
+		Course_10000 = new Table("Course", "crsCode deptId crsName descr", "String String String String", "crsCode", "LinHashMap");
+		Course_50000 = new Table("Course", "crsCode deptId crsName descr", "String String String String", "crsCode", "LinHashMap");
 		
-		Teaching_1000 = new Table("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester");
-		Teaching_2000 = new Table("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester");
-		Teaching_5000 = new Table("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester");
-		Teaching_10000 = new Table("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester");
-		Teaching_50000 = new Table("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester");
+		Teaching_1000 = new Table("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester", "LinHashMap");
+		Teaching_2000 = new Table("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester", "LinHashMap");
+		Teaching_5000 = new Table("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester", "LinHashMap");
+		Teaching_10000 = new Table("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester", "LinHashMap");
+		Teaching_50000 = new Table("Teaching", "crsCode semester profId", "String String Integer", "crsCode semester", "LinHashMap");
 		
-		Transcript_1000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester");
-		Transcript_2000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester");
-		Transcript_5000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester");
-		Transcript_10000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester");
-		Transcript_50000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester");
+		Transcript_1000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester", "LinHashMap");
+		Transcript_2000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester", "LinHashMap");
+		Transcript_5000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester", "LinHashMap");
+		Transcript_10000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester", "LinHashMap");
+		Transcript_50000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester", "LinHashMap");
 		
 		
 		//Generate Data for those tuples

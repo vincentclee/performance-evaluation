@@ -10,6 +10,9 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
 
+import csx370.structure.BpTreeMap;
+import csx370.structure.ExtHashMap;
+import csx370.structure.LinHashMap;
 import static java.lang.System.out;
 import static java.lang.System.err;
 
@@ -73,13 +76,23 @@ public class Table implements Serializable {
 	 * @param _key       the primary key
 	 */
 	@SuppressWarnings("rawtypes")
-	public Table(String _name, String[] _attribute, Class[] _domain, String[] _key) {
+	public Table(String _name, String[] _attribute, Class[] _domain, String[] _key, String structure) {
 		name = _name;
 		attribute = _attribute;
 		domain = _domain;
 		key = _key;
 		tuples = new ArrayList<>();
-		index = new TreeMap<>(); // also try BPTreeMap, LinHashMap or ExtHashMap
+		
+		// also try BPTreeMap, LinHashMap or ExtHashMap
+		if (structure.equalsIgnoreCase("BPTreeMap")) {
+			index = new BpTreeMap<>(KeyType.class, Comparable[].class);
+		} else if (structure.equalsIgnoreCase("LinHashMap")) {
+			index = new LinHashMap<>(KeyType.class, Comparable[].class, 4);
+		} else if (structure.equalsIgnoreCase("ExtHashMap")) {
+			index = new ExtHashMap<>(KeyType.class, Comparable[].class, 4);
+		} else {
+			index = new TreeMap<>();
+		}
 	} // constructor
 	
 	/************************************************************************************
@@ -111,9 +124,9 @@ public class Table implements Serializable {
 	 * @param domains    the string containing attribute domains (data types)
 	 * @param _key       the string containing table key
 	 */
-	public Table(String name, String attributes, String domains, String _key) {
+	public Table(String name, String attributes, String domains, String _key, String structure) {
 		this(name, attributes.split(" "), findClass(domains.split(" ")), _key
-				.split(" "));
+				.split(" "), structure);
 		
 		if (CONSOLE_OUTPUT) {
 			out.println("DDL> create table " + name + " (" + attributes + ")");
