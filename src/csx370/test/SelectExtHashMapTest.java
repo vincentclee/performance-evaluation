@@ -60,5 +60,10 @@ public class SelectExtHashMapTest extends SelectTest {
 		Transcript_50000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester", "ExtHashMap");
 		
 		generateData();
+		
+		//index structure to file
+		if (INDEX_STRUCTURES_OUTPUT) {
+			indexStructuresToDisk(DS_NAME);
+		}
 	}
 }

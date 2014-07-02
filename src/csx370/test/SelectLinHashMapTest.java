@@ -3,6 +3,8 @@ package csx370.test;
 import java.util.ArrayList;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import csx370.operator.Table;
 
@@ -60,6 +62,18 @@ public class SelectLinHashMapTest extends SelectTest {
 		Transcript_50000 = new Table("Transcript", "studId crsCode semester grade", "Integer String String String", "studId crsCode semester", "LinHashMap");
 		
 		generateData();
+		
+		//index structure to file
+		if (INDEX_STRUCTURES_OUTPUT) {
+			indexStructuresToDisk(DS_NAME);
+		}
 	}
 	
+	/**
+	 * Ignores the size test for Linear Hash Map
+	 */
+	@Ignore @Test
+	public void sizeTest() {
+		
+	}
 }

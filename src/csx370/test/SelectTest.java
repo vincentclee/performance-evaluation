@@ -10,18 +10,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import csx370.impl.TupleGenerator;
 import csx370.impl.TupleGeneratorImpl;
 import csx370.operator.KeyType;
 import csx370.operator.Table;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SelectTest {
-
-	/** Data Structure prefix name */
-	private static final String DS_NAME = "generic-data-structure";
-	
 	/** Write Index Structures to Disk */
 	protected static final boolean INDEX_STRUCTURES_OUTPUT = true;
 	
@@ -60,6 +59,7 @@ public class SelectTest {
 	/**
 	 * Generates data for the tests
 	 */
+	@SuppressWarnings("rawtypes")
 	protected static void generateData() {
 
 		// Generate Data for those tuples
@@ -168,7 +168,6 @@ public class SelectTest {
 			Transcript_50000.insert(resultTest[4][i]);
 			Transcript_Data.add(resultTest[4][i]);
 		}
-
 	}
 
 	/**
@@ -1226,7 +1225,7 @@ public class SelectTest {
 	 * Naming convention:
 	 * [data-structure-name]-[table-name]-[#-of-tuples].txt
 	 */
-	public static void indexStructuresToDisk() {
+	public static void indexStructuresToDisk(String DS_NAME) {
 		try {
 			//set path to project path
 			path = Paths.get(System.getProperty("user.dir"));
@@ -1244,115 +1243,115 @@ public class SelectTest {
 			// --------------------- Student
 			
 			//Student 1000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "student-1000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-student-1000.txt").toFile())));
 			Student_1000.printIndex();
 			
 			//Student 2000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "student-2000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-student-2000.txt").toFile())));
 			Student_2000.printIndex();
 			
 			//Student 5000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "student-5000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-student-5000.txt").toFile())));
 			Student_5000.printIndex();
 			
 			//Student 10000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "student-10000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-student-10000.txt").toFile())));
 			Student_10000.printIndex();
 			
 			//Student 50000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "student-50000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-student-50000.txt").toFile())));
 			Student_50000.printIndex();
 			
 			
 			// --------------------- Professor
 			
 			//Professor 1000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "professor-1000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-professor-1000.txt").toFile())));
 			Professor_1000.printIndex();
 			
 			//Professor 2000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "professor-2000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-professor-2000.txt").toFile())));
 			Professor_2000.printIndex();
 			
 			//Professor 5000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "professor-5000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-professor-5000.txt").toFile())));
 			Professor_5000.printIndex();
 			
 			//Professor 10000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "professor-10000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-professor-10000.txt").toFile())));
 			Professor_10000.printIndex();
 			
 			//Professor 50000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "professor-50000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-professor-50000.txt").toFile())));
 			Professor_50000.printIndex();
 			
 			
 			// --------------------- Course
 			
 			//Course 1000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "course-1000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-course-1000.txt").toFile())));
 			Course_1000.printIndex();
 			
 			//Course 2000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "course-2000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-course-2000.txt").toFile())));
 			Course_2000.printIndex();
 			
 			//Course 5000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "course-5000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-course-5000.txt").toFile())));
 			Course_5000.printIndex();
 			
 			//Course 10000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "course-10000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-course-10000.txt").toFile())));
 			Course_10000.printIndex();
 			
 			//Course 50000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "course-50000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-course-50000.txt").toFile())));
 			Course_50000.printIndex();
 			
 			
 			// --------------------- Teaching
 			
 			//Teaching 1000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "teaching-1000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-teaching-1000.txt").toFile())));
 			Teaching_1000.printIndex();
 			
 			//Teaching 2000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "teaching-2000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-teaching-2000.txt").toFile())));
 			Teaching_2000.printIndex();
 			
 			//Teaching 5000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "teaching-5000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-teaching-5000.txt").toFile())));
 			Teaching_5000.printIndex();
 			
 			//Teaching 10000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "teaching-10000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-teaching-10000.txt").toFile())));
 			Teaching_10000.printIndex();
 			
 			//Teaching 50000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "teaching-50000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-teaching-50000.txt").toFile())));
 			Teaching_50000.printIndex();
 			
 			
 			// --------------------- Transcript
 			
 			//Transcript 1000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "transcript-1000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-transcript-1000.txt").toFile())));
 			Transcript_1000.printIndex();
 			
 			//Transcript 2000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "transcript-2000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-transcript-2000.txt").toFile())));
 			Transcript_2000.printIndex();
 			
 			//Transcript 5000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "transcript-5000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-transcript-5000.txt").toFile())));
 			Transcript_5000.printIndex();
 			
 			//Transcript 10000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "transcript-10000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-transcript-10000.txt").toFile())));
 			Transcript_10000.printIndex();
 			
 			//Transcript 50000
-			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "transcript-50000.txt").toFile())));
+			System.setOut(new PrintStream(new FileOutputStream(path.resolve(DS_NAME + "-transcript-50000.txt").toFile())));
 			Transcript_50000.printIndex();
 			
 			
