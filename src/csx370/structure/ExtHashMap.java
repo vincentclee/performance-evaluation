@@ -7,7 +7,9 @@ package csx370.structure;
 
 import java.io.*;
 import java.lang.reflect.Array;
+
 import static java.lang.System.out;
+
 import java.util.*;
 
 /************************************************************************************
@@ -21,7 +23,7 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 	private static final long serialVersionUID = 1L;
 	
 	/** The number of slots (for key-value pairs) per bucket. */
-	private static final int SLOTS = 4;
+	private static final int SLOTS = 10;
 	
 	/** The class for type K. */
 	private final Class<K> classK;
@@ -131,6 +133,7 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 	 * @param value the value to insert
 	 * @return      null (not the previous value)
 	 */
+	@SuppressWarnings("unchecked")
 	public V put(K key, V value) {
 		if (key == null) {
 			return null;
@@ -146,21 +149,31 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 		// Extendible part of the hash table
 		} else {
 			
-			hTable.add(new Bucket());
-			dir.add(i, new Bucket());
+			K[] tempKey = (K[]) Array.newInstance(classK, SLOTS+1);
+			V[] tempValue = (V[]) Array.newInstance(classK, SLOTS+1);
+			
+			for (int x = 0; x < SLOTS; x++) {
+				
+				tempKey[x] = b.key[x];
+				tempValue[x] = b.value[x];
+				
+			}
+			
+			tempKey[SLOTS] = key;
+			tempValue[SLOTS] = value;
+			
+			dir.set(i, new Bucket());
+			
+			Bucket bucket = new Bucket();
+			
+			hTable.add(bucket);
+			dir.add(i, bucket);
 			mod++;
 			nBuckets++;
 			
-			for (int x = 0; x < SLOTS; x++)  {
+			for (int x = 0; x < tempKey.length; x++) {
 				
-				K tempKey = b.key[x];
-				V tempValue = b.value[x];
-				
-				b.key[x] = null;
-				b.value[x] = null;
-				b.nKeys--;
-				
-				put(tempKey, tempValue);
+				put(tempKey[x], tempValue[x]);
 				
 			}
 		}
@@ -203,6 +216,7 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 		out.println("-------------------------------------------");
 		
 		int bucketCount = 0;
+		int itemCount = 0;
 		
 		for (Bucket bucket : hTable) {
 			
@@ -211,9 +225,10 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 			
 			for (int x = 0; x < bucket.nKeys; x++) {
 				
-				out.print("Item #" + bucketCount + ": ");
-				out.println(bucket.value.toString());
+				out.print("Item #" + itemCount + ": ");
+				out.println(bucket.value[x].toString());
 				
+				itemCount++;
 			}
 			
 			bucketCount++;
@@ -240,11 +255,11 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 	 */
 	public static void main(String[] args) {
 		ExtHashMap<Integer, Integer> ht = new ExtHashMap<>(Integer.class,
-				Integer.class, 11);
+				Integer.class, 10);
 		int nKeys = 30;
 		if (args.length == 1)
 			nKeys = Integer.valueOf(args[0]);
-		for (int i = 1; i < nKeys; i += 2)
+		for (int i = 1; i < nKeys; i+=2)
 			ht.put(i, i * i);
 		ht.print();
 		for (int i = 0; i < nKeys; i++) {
