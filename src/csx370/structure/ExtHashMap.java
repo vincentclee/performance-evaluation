@@ -150,7 +150,7 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 		} else {
 			
 			K[] tempKey = (K[]) Array.newInstance(classK, SLOTS+1);
-			V[] tempValue = (V[]) Array.newInstance(classK, SLOTS+1);
+			V[] tempValue = (V[]) Array.newInstance(classV, SLOTS+1);
 			
 			for (int x = 0; x < SLOTS; x++) {
 				
