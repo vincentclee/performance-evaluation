@@ -148,54 +148,6 @@ public class SelectLinHashMapTest {
 		}
 	}
 	
-	/**
-	 * Checks Tables for correct allocation of Tuples (size)
-	 */
-	@Test
-	public void sizeTest() {
-		//Student Tables
-		assertEquals("Student Table Size", 1000, Student_1000.size());
-		assertEquals("Student Table Size", 2000, Student_2000.size());
-		assertEquals("Student Table Size", 5000, Student_5000.size());
-		assertEquals("Student Table Size", 10000, Student_10000.size());
-		assertEquals("Student Table Size", 50000, Student_50000.size());
-		
-		//Professor Tables
-		assertEquals("Professor Table Size", 1000, Professor_1000.size());
-		assertEquals("Professor Table Size", 2000, Professor_2000.size());
-		assertEquals("Professor Table Size", 5000, Professor_5000.size());
-		assertEquals("Professor Table Size", 10000, Professor_10000.size());
-		assertEquals("Professor Table Size", 50000, Professor_50000.size());
-		
-		//Course Tables
-		assertEquals("Course Table Size", 1000, Course_1000.size());
-		assertEquals("Course Table Size", 2000, Course_2000.size());
-		assertEquals("Course Table Size", 5000, Course_5000.size());
-		assertEquals("Course Table Size", 10000, Course_10000.size());
-		assertEquals("Course Table Size", 50000, Course_50000.size());
-		
-		//Teaching Tables
-		assertEquals("Teaching Table Size", 1000, Teaching_1000.size());
-		assertEquals("Teaching Table Size", 2000, Teaching_2000.size());
-		assertEquals("Teaching Table Size", 5000, Teaching_5000.size());
-		assertEquals("Teaching Table Size", 10000, Teaching_10000.size());
-		assertEquals("Teaching Table Size", 50000, Teaching_50000.size());
-		
-		//Transcript Tables
-		assertEquals("Transcript Table Size", 1000, Transcript_1000.size());
-		assertEquals("Transcript Table Size", 2000, Transcript_2000.size());
-		assertEquals("Transcript Table Size", 5000, Transcript_5000.size());
-		assertEquals("Transcript Table Size", 10000, Transcript_10000.size());
-		assertEquals("Transcript Table Size", 50000, Transcript_50000.size());
-		
-		//Generated Random Data
-		assertEquals("Student Data Size", 50000, Student_Data.size());
-		assertEquals("Professor Data Size", 50000, Professor_Data.size());
-		assertEquals("Course Data Size", 50000, Course_Data.size());
-		assertEquals("Teaching Data Size", 50000, Teaching_Data.size());
-		assertEquals("Transcript Data Size", 50000, Transcript_Data.size());
-	}
-	
 	// ----------------------------------------------------------------------------------
 	// Student Tests
 	// ----------------------------------------------------------------------------------
