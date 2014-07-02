@@ -133,6 +133,15 @@ public class Table implements Serializable {
 		}
 	} // constructor
 	
+	/************************************************************************************
+	 * Construct an empty table from the raw string specifications.
+	 * 
+	 * @param name       the name of the relation
+	 * @param attributes the string containing attributes names
+	 * @param domains    the string containing attribute domains (data types)
+	 * @param _key       the string containing table key
+	 * @param structure  the data structure selection
+	 */
 	public Table(String name, String attributes, String domains, String _key, String structure) {
 		this(name, attributes.split(" "), findClass(domains.split(" ")), _key
 				.split(" "), structure);
