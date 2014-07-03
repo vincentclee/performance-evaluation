@@ -1224,6 +1224,7 @@ public class SelectTest {
 	 * 
 	 * Naming convention:
 	 * [data-structure-name]-[table-name]-[#-of-tuples].txt
+	 * @param DS_NAME  the name of the data structure
 	 */
 	public static void indexStructuresToDisk(String DS_NAME) {
 		try {

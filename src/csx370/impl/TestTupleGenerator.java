@@ -64,7 +64,10 @@ public class TestTupleGenerator {
 			out.println(tables[i]);
 			for (int j = 0; j < resultTest[i].length; j++) {
 				for (int k = 0; k < resultTest[i][j].length; k++) {
-					out.print(resultTest[i][j][k] + ",");
+					out.print(resultTest[i][j][k]);
+					if (k < resultTest[i][j].length-1) {
+						out.print(",");
+					}
 				} //for
 				out.println();
 			} //for

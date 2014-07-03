@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="test" name="performance-evaluation">
+<project basedir="." default="init" name="performance-evaluation">
 	<property name="junit.output.dir" value="junit"/>
 		<path id="JUnit4.libraryclasspath">
 			<pathelement location="lib/junit-4.11.jar"/>
@@ -30,19 +30,15 @@
 		<mkdir dir="${junit.output.dir}"/>
 		<junit fork="yes" printsummary="on">
 			<formatter type="xml"/>
+			<test name="csx370.test.SelectBpTreeMapTest" todir="${junit.output.dir}"/>
+			<test name="csx370.test.SelectExtHashMapTest" todir="${junit.output.dir}"/>
 			<test name="csx370.test.SelectLinHashMapTest" todir="${junit.output.dir}"/>
+			<test name="csx370.test.SelectTreeMapTest" todir="${junit.output.dir}"/>
 			<classpath refid="csx370.classpath"/>
 		</junit>
 	</target>
-	<target depends="test" name="INSERT-NEW-ONE-HERE">
-		<echo message="Standard Output: BpTreeMap-stdout.txt"/>
-		<echo message="Standard Error: BpTreeMap-stderr.txt"/>
-		<java classname="csx370.impl.BpTreeMap" failonerror="true" fork="yes" output="BpTreeMap-stdout.txt" error="BpTreeMap-stderr.txt">
-			<classpath refid="csx370.classpath"/>
-        </java>
-	</target>
     <target name="javadoc">
-    	<javadoc access="private" author="true" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="csx370.test,csx370.impl" source="1.8" sourcepath="src" splitindex="true" use="true" version="true">
+    	<javadoc access="private" author="true" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="csx370.impl,csx370.operator,csx370.structure,csx370.test" source="1.8" sourcepath="src" splitindex="true" use="true" version="true">
 		<classpath refid="csx370.classpath"/>
 	</javadoc>
     </target>

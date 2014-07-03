@@ -74,6 +74,7 @@ public class Table implements Serializable {
 	 * @param _attribute the string containing attributes names
 	 * @param _domain    the string containing attribute domains (data types)
 	 * @param _key       the primary key
+	 * @param structure  the data structure selection
 	 */
 	@SuppressWarnings("rawtypes")
 	public Table(String _name, String[] _attribute, Class[] _domain, String[] _key, String structure) {
