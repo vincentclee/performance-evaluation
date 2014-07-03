@@ -30,7 +30,7 @@
 		<mkdir dir="${junit.output.dir}"/>
 		<junit fork="yes" printsummary="on">
 			<formatter type="xml"/>
-			<test name="csx370.test.SelectBpTreeMapTest" todir="${junit.output.dir}"/>
+			<test name="csx370.test.SelectLinHashMapTest" todir="${junit.output.dir}"/>
 			<classpath refid="csx370.classpath"/>
 		</junit>
 	</target>

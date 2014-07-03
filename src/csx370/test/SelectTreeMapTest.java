@@ -7,12 +7,12 @@ import org.junit.BeforeClass;
 import csx370.operator.Table;
 
 /**
- * Tests for sequential select vs. indexed select using the B+ Tree Map
+ * Tests for sequential select vs. indexed select using the Tree Map
  */
 public class SelectTreeMapTest extends SelectTest {
 
 	/** Data Structure prefix name */
-	private static final String DS_NAME = "b+tree-map";
+	private static final String DS_NAME = "tree-map";
 	
 	/**
 	 * Set up Tables and Data

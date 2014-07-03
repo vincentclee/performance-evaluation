@@ -9,12 +9,12 @@ import org.junit.Test;
 import csx370.operator.Table;
 
 /**
- * Tests for sequential select vs. indexed select using the B+ Tree Map
+ * Tests for sequential select vs. indexed select using the Linear Hash Map
  */
 public class SelectLinHashMapTest extends SelectTest {
 
 	/** Data Structure prefix name */
-	private static final String DS_NAME = "b+tree-map";
+	private static final String DS_NAME = "linear-hash-map";
 	
 	/**
 	 * Set up Tables and Data
