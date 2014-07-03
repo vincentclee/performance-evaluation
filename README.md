@@ -1,7 +1,7 @@
 #CSCI 4370/6370 Database Management
 
 ##Task List
-not quite sure
+Compare sequential select vs. indexed select, nested loop join vs. indexed join and TreeMap vs. all index structures.
 
 
 ##Project Information
