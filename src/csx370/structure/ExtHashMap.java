@@ -23,7 +23,7 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 	private static final long serialVersionUID = 1L;
 	
 	/** The number of slots (for key-value pairs) per bucket. */
-	private static final int SLOTS = 10;
+	private static final int SLOTS = 4;
 	
 	/** The class for type K. */
 	private final Class<K> classK;
@@ -205,7 +205,18 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 	 * @return the size of the hash table
 	 */
 	public int size() {
-		return SLOTS * nBuckets;
+		
+		int count = 0;
+		
+		for (int x = 0; x < dir.size(); x++) {
+			for (int y = 0; y < SLOTS; y++) {
+				if (dir.get(x).key[y] != null) {
+					count++;
+				}
+			}
+		}
+		
+		return count;
 	} // size
 	
 	/********************************************************************************
@@ -218,7 +229,7 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 		int bucketCount = 0;
 		int itemCount = 0;
 		
-		for (Bucket bucket : hTable) {
+		for (Bucket bucket : dir) {
 			
 			out.println("------------------Bucket #" + bucketCount
 					+ "-----------------");
@@ -244,7 +255,7 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 	 * @return    the location of the directory entry referencing the bucket
 	 */
 	private int h(Object key) {
-		return key.hashCode() % mod;
+		return Math.abs(key.hashCode()) % mod;
 	} // h
 	
 	/********************************************************************************
@@ -255,12 +266,12 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 	 */
 	public static void main(String[] args) {
 		ExtHashMap<Integer, Integer> ht = new ExtHashMap<>(Integer.class,
-				Integer.class, 10);
-		int nKeys = 30;
+				Integer.class, 4);
+		int nKeys = 10000;
 		if (args.length == 1)
 			nKeys = Integer.valueOf(args[0]);
-		for (int i = 1; i < nKeys; i+=2)
-			ht.put(i, i * i);
+		for (int i = 0; i < nKeys; i++)
+			ht.put(i, i);
 		ht.print();
 		for (int i = 0; i < nKeys; i++) {
 			out.println("key = " + i + " value = " + ht.get(i));
