@@ -327,7 +327,66 @@ public class Table implements Serializable {
 		return new Table(name + count++, attribute, domain, key, rows);
 	} // minus
 
-	/************************************************************************************
+        /************************************************************************************
+	 * Join this table and table2 by performing an equijoin. Tuples from both
+	 * tables are compared requiring attributes1 to equal attributes2.
+	 * Disambiguate attribute names by append "2" to the end of any duplicate
+	 * attribute name.
+	 *
+	 * #usage movie.join ("studioNo", "name", studio) #usage movieStar.join
+	 * ("name == s.name", starsIn)
+	 *
+	 * @param attribute1 the attributes of this table to be compared (Foreign Key)
+	 * @param attribute2 the attributes of table2 to be compared (Primary Key)
+	 * @param table2 the rhs table in the join operation
+	 * @return a table with tuples satisfying the equality predicate
+	 */
+         public Table nestedLoopJoin(String attribute1, String attribute2, Table table2)
+         {
+	   String[] t_attrs = attribute1.split(" ");
+	   String[] u_attrs = attribute2.split(" ");
+	   
+	   List<Comparable[]> rows = new ArrayList<Comparable[]>();
+	   
+	   // Iterate through tuples of each with nested loop
+	   for (Comparable[] e : this.tuples)
+	   {               
+	     for (Comparable[] e2 : table2.tuples)
+	     {   
+	       // check for match
+	       boolean match = true;
+	       Comparable[] eVal = this.extract(e, t_attrs);
+	       Comparable[] e2Val = table2.extract(e2, u_attrs);
+	       for(int i = 0; i < eVal.length; i++)
+	       {
+		 if(!eVal[i].equals(e2Val[i]))
+		 {
+		   match = false;
+		 }
+	       }
+               
+	       if(match)
+	       {
+		 // Create a new tupple for concat
+		 Comparable[] combined = new Comparable[attribute.length
+							+ table2.attribute.length];
+		 
+		 // Do the concat
+		 System.arraycopy(e, 0, combined, 0, e.length);
+		 System.arraycopy(e2, 0, combined, e.length,
+				  e2.length);
+		 
+		 // Add tupple to List
+		 rows.add(combined);
+	       }// if
+	     }// for
+	   }// for
+	   
+	   return new Table(name + count++, ArrayUtil.concat(attribute, table2.attribute), ArrayUtil.concat(domain, table2.domain),
+			    key, rows);
+	 }// nestedLoopJoin
+  
+         /************************************************************************************
 	 * Join this table and table2 by performing an equijoin. Tuples from both
 	 * tables are compared requiring attributes1 to equal attributes2.
 	 * Disambiguate attribute names by append "2" to the end of any duplicate
