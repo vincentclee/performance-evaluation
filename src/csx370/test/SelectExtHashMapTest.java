@@ -7,12 +7,12 @@ import org.junit.BeforeClass;
 import csx370.operator.Table;
 
 /**
- * Tests for sequential select vs. indexed select using the Extended Hash Map
+ * Tests for sequential select vs. indexed select using the Extendable Hash Map
  */
 public class SelectExtHashMapTest extends SelectTest {
 
 	/** Data Structure prefix name */
-	private static final String DS_NAME = "extended-hash-map";
+	private static final String DS_NAME = "extendable-hash-map";
 	
 	/**
 	 * Set up Tables and Data
