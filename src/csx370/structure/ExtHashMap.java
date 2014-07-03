@@ -244,7 +244,13 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 	 * @return the location of the directory entry referencing the bucket
 	 */
 	private int h(Object key) {
-		return key.hashCode() % mod;
+	  int rVal = Math.abs(key.hashCode()) % mod;
+	  if(rVal > mod)
+	  {
+	    rVal -= mod;
+	  }// if
+
+	  return rVal;
 	} // h
 
 	/********************************************************************************

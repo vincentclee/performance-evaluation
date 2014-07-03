@@ -318,16 +318,30 @@ public class LinHashMap<K, V> extends AbstractMap<K, V> implements
 	 *            the key to hash
 	 * @return the location of the bucket chain containing the key-value pair
 	 */
-	private int hash(Object key) {
-		int i = h(key);
+	private int hash(Object key) 
+	{ 
+	  int i = Math.abs(h(key));
 
-		// if the current index has already been split, use the higher
-		// resolution hash
-		if (i < split) {
-			i = h2(key);
-		}// if
+          // if the current index has already been split, use the higher 
+          // resolution hash 
+	  if (i < split) 
+	  { 
+	    i = Math.abs(h2(key)); 
 
-		return i;
+	    if(i > mod2) 
+	    { 
+	      i -= mod2; 
+	    }// if 
+	  }// if 
+	  else 
+	  { 
+	    if(i > mod1) 
+	    { 
+	      i -= mod1; 
+	    }// if 
+	  }// else
+
+	  return i; 
 	}// hash
 
 	/********************************************************************************
