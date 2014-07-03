@@ -71,80 +71,98 @@ public class Table implements Serializable {
 	 */
 	private final Map<KeyType, Comparable[]> index;
 
-	// ----------------------------------------------------------------------------------
-	// Constructors
-	// ----------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------
+        // Constructors
+        // ----------------------------------------------------------------------------------
 
-	/************************************************************************************
+        /************************************************************************************
 	 * Construct an empty table from the meta-data specifications.
 	 *
-	 * @param _name
-	 *            the name of the relation
-	 * @param _attribute
-	 *            the string containing attributes names
-	 * @param _domain
-	 *            the string containing attribute domains (data types)
-	 * @param _key
-	 *            the primary key
+	 * @param _name the name of the relation
+	 * @param _attribute the string containing attributes names
+	 * @param _domain the string containing attribute domains (data types)
+	 * @param _key the primary key
 	 */
-	public Table(String _name, String[] _attribute, Class[] _domain,
-			String[] _key) {
-		name = _name;
-		attribute = _attribute;
-		domain = _domain;
-		key = _key;
-		tuples = new ArrayList<>();
-		index = new TreeMap<>(); // also try BPTreeMap, LinHashMap or ExtHashMap
-	} // constructor
-
-	/************************************************************************************
-	 * Construct a table from the meta-data specifications and data in _tuples
-	 * list.
-	 *
-	 * @param _name
-	 *            the name of the relation
-	 * @param _attribute
-	 *            the string containing attributes names
-	 * @param _domain
-	 *            the string containing attribute domains (data types)
-	 * @param _key
-	 *            the primary key
-	 * @param _tuples
-	 *            the list of tuples containing the data
-	 */
-	public Table(String _name, String[] _attribute, Class[] _domain,
-			String[] _key, List<Comparable[]> _tuples) {
-		name = _name;
-		attribute = _attribute;
-		domain = _domain;
-		key = _key;
-		tuples = _tuples;
-		index = new TreeMap<>(); // also try BPTreeMap, LinHashMap or ExtHashMap
-	} // constructor
-
-	/************************************************************************************
-	 * Construct an empty table from the raw string specifications.
-	 *
-	 * @param name
-	 *            the name of the relation
-	 * @param attributes
-	 *            the string containing attributes names
-	 * @param domains
-	 *            the string containing attribute domains (data types)
-	 * @param _key
-	 * 			  the string containing table key
-	 */
-	public Table(String name, String attributes, String domains, String _key) {
-		this(name, attributes.split(" "), findClass(domains.split(" ")), _key
-				.split(" "));
-
+         @SuppressWarnings("rawtypes")
+         public Table(String _name, String[] _attribute, Class[] _domain, String[] _key, String structure) {
+	   name = _name;
+	   attribute = _attribute;
+	   domain = _domain;
+	   key = _key;
+	   tuples = new ArrayList<>();
+	   
+           // also try BPTreeMap, LinHashMap or ExtHashMap
+	   if (structure.equalsIgnoreCase("BPTreeMap")) {
+	     index = new BpTreeMap<>(KeyType.class, Comparable[].class);
+	   } else if (structure.equalsIgnoreCase("LinHashMap")) {
+	     index = new LinHashMap<>(KeyType.class, Comparable[].class, 4);
+	   } else if (structure.equalsIgnoreCase("ExtHashMap")) {
+	     index = new ExtHashMap<>(KeyType.class, Comparable[].class, 4);
+	   } else {
+	     index = new TreeMap<>();
+	   }
+	 } // constructor
+  
+         /************************************************************************************
+	  * Construct a table from the meta-data specifications and data in _tuples
+	  * list.
+	  *
+	  * @param _name the name of the relation
+	  * @param _attribute the string containing attributes names
+	  * @param _domain the string containing attribute domains (data types)
+	  * @param _key the primary key
+	  * @param _tuples the list of tuples containing the data
+	  */
+          @SuppressWarnings("rawtypes")
+	  public Table(String _name, String[] _attribute, Class[] _domain,
+		       String[] _key, List<Comparable[]> _tuples) {
+	    name = _name;
+	    attribute = _attribute;
+	    domain = _domain;
+	    key = _key;
+	    tuples = _tuples;
+	    index = new TreeMap<>(); // also try BPTreeMap, LinHashMap or ExtHashMap
+	  } // constructor
+  
+          /************************************************************************************
+	   * Construct an empty table from the raw string specifications.
+	   *
+	   * @param name the name of the relation
+	   * @param attributes the string containing attributes names
+	   * @param domains the string containing attribute domains (data types)
+	   * @param _key the string containing table key
+	   */
+           public Table(String name, String attributes, String domains, String _key) {
+	     this(name, attributes.split(" "), findClass(domains.split(" ")), _key
+		  .split(" "), "TreeMap");
+	     
+	     if (CONSOLE_OUTPUT) {
+	       out.println("DDL> create table " + name + " (" + attributes + ")");
+	     }
+	   } // constructor
+  
+           /************************************************************************************
+	    * Construct an empty table from the raw string specifications.
+	    *
+	    * @param name the name of the relation
+	    * @param attributes the string containing attributes names
+	    * @param domains the string containing attribute domains (data types)
+	    * @param _key the string containing table key
+	    * @param structure the data structure selection
+	    */
+            public Table(String name, String attributes, String domains, String _key, String structure) {
+	      this(name, attributes.split(" "), findClass(domains.split(" ")), _key
+		   .split(" "), structure);
+	      
+	      if (CONSOLE_OUTPUT) {
 		out.println("DDL> create table " + name + " (" + attributes + ")");
-	} // constructor
-
-	// ----------------------------------------------------------------------------------
-	// Public Methods
-	// ----------------------------------------------------------------------------------
-
+	      }
+	    } // constructor
+  
+  // ----------------------------------------------------------------------------------
+  // Public Methods
+  // ----------------------------------------------------------------------------------
+  
 	/************************************************************************************
 	 * Project the tuples onto a lower dimension by keeping only the given
 	 * attributes. Check whether the original key is included in the projection.
