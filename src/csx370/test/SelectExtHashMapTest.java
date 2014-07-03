@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import csx370.operator.Table;
 
 /**
- * Tests for sequential select vs. indexed select using the Extendable Hash Map
+ * Extendable Hash Map tests for sequential select vs indexed select
  */
 public class SelectExtHashMapTest extends SelectTest {
 

@@ -19,6 +19,9 @@ import csx370.impl.TupleGeneratorImpl;
 import csx370.operator.KeyType;
 import csx370.operator.Table;
 
+/**
+ * Base for sequential select vs indexed select tests
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SelectTest {
 	/** Write Index Structures to Disk */

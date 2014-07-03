@@ -9,7 +9,7 @@ import org.junit.Test;
 import csx370.operator.Table;
 
 /**
- * Tests for sequential select vs. indexed select using the Linear Hash Map
+ * Linear Hash Map tests for sequential select vs indexed select
  */
 public class SelectLinHashMapTest extends SelectTest {
 

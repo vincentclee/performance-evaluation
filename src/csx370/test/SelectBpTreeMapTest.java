@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import csx370.operator.Table;
 
 /**
- * Tests for sequential select vs. indexed select using the B+ Tree Map
+ * B+ Tree Map tests for sequential select vs indexed select
  */
 public class SelectBpTreeMapTest extends SelectTest {
 
