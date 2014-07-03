@@ -13,6 +13,10 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
 
+import csx370.structure.BpTreeMap;
+import csx370.structure.ExtHashMap;
+import csx370.structure.LinHashMap;
+
 import static java.lang.Boolean.*;
 import static java.lang.System.out;
 import static java.lang.System.err;
@@ -135,10 +139,6 @@ public class Table implements Serializable {
            public Table(String name, String attributes, String domains, String _key) {
 	     this(name, attributes.split(" "), findClass(domains.split(" ")), _key
 		  .split(" "), "TreeMap");
-	     
-	     if (CONSOLE_OUTPUT) {
-	       out.println("DDL> create table " + name + " (" + attributes + ")");
-	     }
 	   } // constructor
   
            /************************************************************************************
@@ -153,10 +153,6 @@ public class Table implements Serializable {
             public Table(String name, String attributes, String domains, String _key, String structure) {
 	      this(name, attributes.split(" "), findClass(domains.split(" ")), _key
 		   .split(" "), structure);
-	      
-	      if (CONSOLE_OUTPUT) {
-		out.println("DDL> create table " + name + " (" + attributes + ")");
-	      }
 	    } // constructor
   
   // ----------------------------------------------------------------------------------
@@ -174,7 +170,6 @@ public class Table implements Serializable {
 	 * @return a table of projected tuples
 	 */
 	public Table project(String attributes) {
-		out.println("RA> " + name + ".project (" + attributes + ")");
 		String[] attrs = attributes.split(" ");
 		Class[] colDomain = extractDom(match(attrs), domain);
 		String[] newKey = (Arrays.asList(attrs).containsAll(Arrays.asList(key))) ? key
@@ -224,8 +219,6 @@ public class Table implements Serializable {
 	 * @return a table with tuples satisfying the predicate
 	 */
 	public Table select(Predicate<Comparable[]> predicate) {
-		out.println("RA> " + name + ".select (" + predicate + ")");
-
 		List<Comparable[]> rows = null;
 
 		// Intialize data structure
@@ -250,8 +243,6 @@ public class Table implements Serializable {
 	 * @return a table with the tuple satisfying the key predicate
 	 */
 	public Table select(KeyType keyVal) {
-		out.println("RA> " + name + ".select (" + keyVal + ")");
-
 		List<Comparable[]> rows = null;
 
 		// Intialize data structure
@@ -273,8 +264,6 @@ public class Table implements Serializable {
 	 * @return a table representing the union
 	 */
 	public Table union(Table table2) {
-		out.println("RA> " + name + ".union (" + table2.name + ")");
-		
 		if (!compatible(table2)) {
 			return null;
 		}
@@ -308,8 +297,6 @@ public class Table implements Serializable {
 	 * @return a table representing the difference
 	 */
 	public Table minus(Table table2) {
-		out.println("RA> " + name + ".minus (" + table2.name + ")");
-		
 		if (!compatible(table2)) {
 			return null;
 		}
@@ -422,9 +409,6 @@ public class Table implements Serializable {
 	 * @return a table with tuples satisfying the equality predicate
 	 */
 	public Table join(String attribute1, String attribute2, Table table2) {
-		out.println("RA> " + name + ".join (" + attribute1 + ", "
-				+ attribute2 + ", " + table2.name + ")");
-
 		String[] t_attrs = attribute1.split(" ");
 		String[] u_attrs = attribute2.split(" ");
 
@@ -489,9 +473,6 @@ public class Table implements Serializable {
 	 * @return whether insertion was successful
 	 */
 	public boolean insert(Comparable[] tup) {
-		out.println("DML> insert into " + name + " values ( "
-				+ Arrays.toString(tup) + " )");
-
 		if (typeCheck(tup, this.domain)) {
 			tuples.add(tup);
 			Comparable[] keyVal = new Comparable[key.length];
