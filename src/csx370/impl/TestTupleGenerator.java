@@ -15,7 +15,7 @@ import static java.lang.System.out;
 public class TestTupleGenerator {
 	/*************************************************************************************
 	 * The main method is the driver for TestGenerator.
-	 * @param args  the command-line arguments
+	 * @param args the command-line arguments
 	 */
 	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) {

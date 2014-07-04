@@ -33,7 +33,7 @@ public class TupleGeneratorImpl implements TupleGenerator {
 	 * @param attribute   the array of attributes
 	 * @param domain      the array of domains
 	 * @param primaryKey  the array of primary keys
-	 * @param foriegnKey  the array of foriegn keys
+	 * @param foreignKey  the array of foriegn keys
 	 */
 	public void addRelSchema(String name, String[] attribute, String[] domain,
 			String[] primaryKey, String[][] foreignKey) {
@@ -51,7 +51,7 @@ public class TupleGeneratorImpl implements TupleGenerator {
 	 * @param attribute   the string embedding the table's attributes
 	 * @param domain      the string embedding the table's domains
 	 * @param primaryKey  the string embedding the table's primary keys
-	 * @param foriegnKey  the array of foriegn keys
+	 * @param foreignKey  the array of foriegn keys
 	 */
 	public void addRelSchema(String name, String attribute, String domain,
 			String primaryKey, String[][] foreignKey) {
