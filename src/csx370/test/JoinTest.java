@@ -31,7 +31,7 @@ public class JoinTest
 		jt.indexedTimes("LinHashMap");
 		jt.indexedTimes("ExtHashMap");
 		jt.indexedTimes("BPTreeMap");
-		//jt.nestedLoopTimes();
+		jt.nestedLoopTimes();
 	}// main
 	
 	/*
@@ -47,23 +47,23 @@ public class JoinTest
 
 		this.begin = System.nanoTime();
 		this.indexed1000();
-		System.out.println("1000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + "s");
+		System.out.println("1000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + " s");
 
 		this.begin = System.nanoTime();
 		this.indexed2000();
-		System.out.println("2000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + "s");
+		System.out.println("2000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + " s");
 	
 		this.begin = System.nanoTime();
 		this.indexed5000();
-		System.out.println("5000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + "s");
+		System.out.println("5000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + " s");
 		
 		this.begin = System.nanoTime();
 		this.indexed10000();
-		System.out.println("10000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + "s");
+		System.out.println("10000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + " s");
 		
 		this.begin = System.nanoTime();
 		this.indexed50000();
-		System.out.println("50000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + "s");
+		System.out.println("50000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + " s");
 		
 		System.out.println();
 	}// indexedTimes
@@ -73,24 +73,24 @@ public class JoinTest
 	{
 		this.begin = System.nanoTime();
 		this.nestedLoop1000();
-		System.out.println("1000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + "s");
+		System.out.println("1000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + " s");
 		
 		this.begin = System.nanoTime();
 		this.nestedLoop2000();
-		System.out.println("2000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + "s");
+		System.out.println("2000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + " s");
 		
 		this.begin = System.nanoTime();
 		this.nestedLoop5000();
-		System.out.println("5000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + "s");
+		System.out.println("5000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + " s");
 		
 		this.begin = System.nanoTime();
 		this.nestedLoop10000();
-		System.out.println("10000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + "s");
+		System.out.println("10000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + " s");
 		
 		// this will take an incredibly long time
 		this.begin = System.nanoTime();
 		this.nestedLoop50000();
-		System.out.println("50000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + "s");
+		System.out.println("50000: " + (System.nanoTime() - this.begin) / (double) 1000000000 + " s");
 	}// nestedLoopTimes
 	
 	private void indexed1000()
