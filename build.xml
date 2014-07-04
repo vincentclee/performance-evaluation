@@ -34,6 +34,7 @@
 			<test name="csx370.test.SelectExtHashMapTest" todir="${junit.output.dir}"/>
 			<test name="csx370.test.SelectLinHashMapTest" todir="${junit.output.dir}"/>
 			<test name="csx370.test.SelectTreeMapTest" todir="${junit.output.dir}"/>
+			<test name="csx370.test.JoinTest" todir="${junit.output.dir}"/>
 			<classpath refid="csx370.classpath"/>
 		</junit>
 	</target>
