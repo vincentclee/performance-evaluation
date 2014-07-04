@@ -13,12 +13,12 @@ import static java.lang.System.out;
 import java.util.*;
 
 /************************************************************************************
- * This class provides hash maps that use the Extendable Hashing algorithm.
- * Buckets are allocated and stored in a hash table and are referenced using
- * directory dir.
- */
+* This class provides hash maps that use the Extendable Hashing algorithm.
+* Buckets are allocated and stored in a hash table and are referenced using
+* directory dir.
+*/
 public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
-		Serializable, Cloneable, Map<K, V> {
+	Serializable, Cloneable, Map<K, V> {
 	/** Serialize */
 	private static final long serialVersionUID = 1L;
 	
@@ -255,7 +255,13 @@ public class ExtHashMap<K, V> extends AbstractMap<K, V> implements
 	 * @return    the location of the directory entry referencing the bucket
 	 */
 	private int h(Object key) {
-		return Math.abs(key.hashCode()) % mod;
+	        int rVal = Math.abs(key.hashCode()) % mod;
+		if(rVal > mod)
+		{
+		  rVal -= mod;
+		}// if
+		
+		return rVal;
 	} // h
 	
 	/********************************************************************************
